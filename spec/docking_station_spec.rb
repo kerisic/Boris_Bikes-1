@@ -17,6 +17,14 @@ describe DockingStation do
     expect(bike.working?).to eq true
 	end
 
+	it 'can set a different capacity when initialized' do
+		expect(DockingStation.new(30).capacity).to eq(30)
+	end
+
+	it 'will return a default capacity of 20 when none is specified' do
+		expect(DockingStation.new.capacity).to eq(20)
+	end
+
 	# dock is a method held by DockingStation, taking an argument of (bike)
 
 	it 'can dock a bike' do
