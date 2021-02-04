@@ -5,15 +5,16 @@ describe DockingStation do
 	it { is_expected.to respond_to(:check_bike)}
 
   docking_station = DockingStation.new
-  bike = Bike.new
+  let(:bike) {double :bike}
 
-	it 'relase a bike' do
-		docking_station.dock(bike)
+	it 'release a bike' do
+		docking_station.dock(Bike.new)
 		bike = docking_station.release_bike
     expect(bike).to be_instance_of Bike
   end
 
   it 'check if its working' do
+		allow(bike).to receive(:working?).and_return(true)
     expect(bike.working?).to eq true
 	end
 
@@ -28,7 +29,7 @@ describe DockingStation do
 	# dock is a method held by DockingStation, taking an argument of (bike)
 
 	it 'can dock a bike' do
-		expect(docking_station.dock(bike)).to eq "Bike Docked!"
+		expect(docking_station.dock(double(:bike))).to eq "Bike Docked!"
 	end
 
 	it 'should return true if a bike is available' do
@@ -44,19 +45,20 @@ describe DockingStation do
   it 'return error if dock method called on full station' do
     docking_station = DockingStation.new
     DockingStation::DEFAULT_CAPACITY.times {docking_station.dock(Bike.new)}
-    expect { docking_station.dock(bike) }.to raise_error("Station full")
+    expect { docking_station.dock(double(:bike)) }.to raise_error("Station full")
   end
 
-	it 'be able to report broken bike when docking' do
-		bike = Bike.new
-		DockingStation.new.dock(bike,false)
+	it 'be able to report broken bike' do
+		bike = double(:bike, report_broken: false, working?: false)
+		bike.report_broken
 		expect(bike.working?).to eq(false)
 	end
 
 	it 'should not release a broken bike' do
-    bike = Bike.new
+		bike = double(:bike, working?: false)
 		dockingstation = DockingStation.new
-		dockingstation.dock(bike,false)
+		#allow(bike).to receive(:working?).and_return(false)
+		dockingstation.dock(bike)
 		expect{ dockingstation.release_bike }.to raise_error("No bikes avaliable")
   end
 end
