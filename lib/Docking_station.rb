@@ -9,7 +9,7 @@ class DockingStation
 	end
 
 	def release_bike
-    raise "No bikes avaliable" if empty?
+    raise "No bikes avaliable" if empty? || @bike_list[-1].working == false
 	  @bike_list.pop
 	end
 

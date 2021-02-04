@@ -53,4 +53,10 @@ describe DockingStation do
 		expect(bike.working?).to eq(false)
 	end
 
+	it 'should not release a broken bike' do
+    bike = Bike.new
+		dockingstation = DockingStation.new
+		dockingstation.dock(bike,false)
+		expect{ dockingstation.release_bike }.to raise_error("No bikes avaliable")
+  end
 end
