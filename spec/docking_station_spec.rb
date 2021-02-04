@@ -29,10 +29,13 @@ describe DockingStation do
 	end
 
   it 'return error if release method called on empty station' do
+    docking_station = DockingStation.new
     expect { docking_station.release_bike }.to raise_error("No bikes avaliable")
   end
 
   it 'return error if dock method called on full station' do
+    docking_station = DockingStation.new
+    DockingStation::DEFAULT_CAPACITY.times {docking_station.dock(Bike.new)}
     expect { docking_station.dock(bike) }.to raise_error("Station full")
   end
 
