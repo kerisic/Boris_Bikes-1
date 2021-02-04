@@ -13,9 +13,12 @@ class DockingStation
 	  @bike_list.pop
 	end
 
-	def dock(bike)
+	def dock(bike, working = true)
     raise "Station full" if full?
 		@bike_list << bike
+		if !working
+			bike.working = false
+		end
 		return "Bike Docked!"
 	end
 
@@ -39,8 +42,14 @@ end
 
 class Bike
 
+	attr_accessor :working
+
+	def initialize
+		@working = true
+	end
+
   def working?
-    true
+    @working
   end
 
 end

@@ -47,4 +47,10 @@ describe DockingStation do
     expect { docking_station.dock(bike) }.to raise_error("Station full")
   end
 
+	it 'be able to report broken bike when docking' do
+		bike = Bike.new
+		DockingStation.new.dock(bike,false)
+		expect(bike.working?).to eq(false)
+	end
+
 end
