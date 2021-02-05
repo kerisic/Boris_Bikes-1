@@ -6,4 +6,10 @@ class Garage
     @fix_list = []
   end
 
+  def fix
+    @fix_list.each do |x|
+      x.broken = false
+    end
+  end
+
 end

@@ -43,6 +43,8 @@ end
 
 class Bike
 
+	attr_accessor :broken
+
 	def initialize
 		@working = true
 		@broken = false
