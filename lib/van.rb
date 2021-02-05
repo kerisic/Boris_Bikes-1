@@ -9,12 +9,10 @@ class Van
   end
 
   def take(station)
-  (station.bike_list).each do |x|
-    if x.broken?
-      @broken_bikes << x
+    station.bike_list.each do |x|
+      @broken_bikes << x if x.broken?
     end
-  end
-  station.bike_list.delete_if {|x| x.broken? }
+    station.bike_list.delete_if(&:broken?)
   end
 
   def deliver(garage)
@@ -23,5 +21,4 @@ class Van
     end
     @broken_bikes = []
   end
-
 end

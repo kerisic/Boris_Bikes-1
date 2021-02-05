@@ -3,7 +3,6 @@ require 'Docking_station'
 require 'garage'
 
 describe Garage do
-
   docking_station = DockingStation.new
   bike1 = Bike.new
   bike2 = Bike.new
@@ -16,10 +15,9 @@ describe Garage do
   garage = Garage.new
   van.deliver(garage)
 
-  it "fixes broken bikes so that they are working again" do
+  it 'fixes broken bikes so that they are working again' do
     garage.fix
     expect(garage.fix_list[0]).not_to be_broken
     expect(garage.fix_list[1]).not_to be_broken
   end
-
 end

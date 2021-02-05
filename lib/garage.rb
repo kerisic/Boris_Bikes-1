@@ -1,5 +1,4 @@
 class Garage
-
   attr_accessor :fix_list
 
   def initialize
@@ -11,5 +10,4 @@ class Garage
       x.broken = false
     end
   end
-
 end

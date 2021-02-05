@@ -3,7 +3,7 @@ require 'Docking_station'
 require 'garage'
 
 describe Van do
-  it {is_expected.to be_a Van}
+  it { is_expected.to be_a Van }
 
   docking_station = DockingStation.new
   bike1 = Bike.new
@@ -16,8 +16,8 @@ describe Van do
     docking_station.dock(bike2)
     docking_station.dock(Bike.new)
     subject.take(docking_station)
-    expect(subject.broken_bikes.size).to eq (2)
-    expect(docking_station.bike_list.size).to eq (1)
+    expect(subject.broken_bikes.size).to eq(2)
+    expect(docking_station.bike_list.size).to eq(1)
   end
 
   it 'delivers broken bikes to garages' do
@@ -26,7 +26,6 @@ describe Van do
     subject.take(docking_station)
     garage = Garage.new
     subject.deliver(garage)
-    expect(garage.fix_list.size).to eq (2)
+    expect(garage.fix_list.size).to eq(2)
   end
-
 end
