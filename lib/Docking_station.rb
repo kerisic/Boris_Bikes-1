@@ -1,5 +1,8 @@
+require_relative 'van'
+
 class DockingStation
-	attr_reader :bike_list, :capacity
+	attr_reader :capacity
+	attr_accessor :bike_list
 
   DEFAULT_CAPACITY = 20
 
@@ -41,6 +44,7 @@ class Bike
 
 	def initialize
 		@working = true
+		@broken = false
 	end
 
 	def report_broken
