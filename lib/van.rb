@@ -1,4 +1,5 @@
 require_relative 'Docking_station'
+require_relative 'garage'
 
 class Van
   attr_accessor :broken_bikes
@@ -14,6 +15,13 @@ class Van
     end
   end
   station.bike_list.delete_if {|x| x.broken? }
+  end
+
+  def deliver(garage)
+    @broken_bikes.each do |x|
+      garage.fix_list << x
+    end
+    @broken_bikes = []
   end
 
 end

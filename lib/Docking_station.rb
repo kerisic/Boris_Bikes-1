@@ -1,4 +1,5 @@
 require_relative 'van'
+require_relative 'garage'
 
 class DockingStation
 	attr_reader :capacity
