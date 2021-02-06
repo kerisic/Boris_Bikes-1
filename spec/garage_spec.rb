@@ -17,7 +17,7 @@ describe Garage do
 
   it 'fixes broken bikes so that they are working again' do
     garage.fix
-    expect(garage.fix_list[0]).not_to be_broken
-    expect(garage.fix_list[1]).not_to be_broken
+    expect(garage.bikes[0]).not_to be_broken
+    expect(garage.bikes[1]).not_to be_broken
   end
 end

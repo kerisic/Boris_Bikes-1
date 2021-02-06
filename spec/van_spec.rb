@@ -16,8 +16,8 @@ describe Van do
     docking_station.dock(bike2)
     docking_station.dock(Bike.new)
     subject.take(docking_station)
-    expect(subject.broken_bikes.size).to eq(2)
-    expect(docking_station.bike_list.size).to eq(1)
+    expect(subject.bikes.size).to eq(2)
+    expect(docking_station.bikes.size).to eq(1)
   end
 
   it 'delivers broken bikes to garages' do
@@ -26,7 +26,7 @@ describe Van do
     subject.take(docking_station)
     garage = Garage.new
     subject.deliver(garage)
-    expect(garage.fix_list.size).to eq(2)
+    expect(garage.bikes.size).to eq(2)
   end
 
   it 'collects working bikes from garages' do
@@ -37,7 +37,7 @@ describe Van do
     subject.deliver(garage)
     garage.fix
     subject.collect(garage)
-    expect(subject.fixed_bikes[0]).not_to be_broken
+    expect(subject.bikes[0]).not_to be_broken
   end
 
   it "distributes working bikes to docking stations" do
@@ -49,6 +49,6 @@ describe Van do
     garage.fix
     subject.collect(garage)
     subject.distribute(docking_station)
-    expect(docking_station.bike_list[0]).not_to be_broken
+    expect(docking_station.bikes[0]).not_to be_broken
   end
 end

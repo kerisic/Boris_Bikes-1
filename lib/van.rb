@@ -2,38 +2,34 @@ require_relative 'Docking_station'
 require_relative 'garage'
 
 class Van
-  attr_accessor :broken_bikes, :fixed_bikes
-
-  def initialize
-    @broken_bikes = []
-    @fixed_bikes = []
-  end
+  include BikeContainer
+  attr_accessor :bikes
 
   def take(station)
-    station.bike_list.each do |x|
-      @broken_bikes << x if x.broken?
+    station.bikes.each do |x|
+      bikes << x if x.broken?
     end
-    station.bike_list.delete_if(&:broken?)
+    station.bikes.delete_if(&:broken?)
   end
 
   def deliver(garage)
-    @broken_bikes.each do |x|
-      garage.fix_list << x
+    bikes.each do |x|
+      garage.bikes << x
     end
-    @broken_bikes = []
+    bikes = []
   end
 
   def collect(garage)
-    garage.fix_list.each do |x|
-      @fixed_bikes << x
+    garage.bikes.each do |x|
+      bikes << x
     end
-    garage.fix_list = []
+    garage.bikes = []
   end
 
   def distribute(station)
-    @fixed_bikes.each do |x|
-      station.bike_list << x
+    bikes.each do |x|
+      station.bikes << x
     end
-    @fixed_bikes = []
+    bikes = []
   end
 end

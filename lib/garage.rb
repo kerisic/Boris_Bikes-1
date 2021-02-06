@@ -1,12 +1,10 @@
 class Garage
-  attr_accessor :fix_list
+include BikeContainer
 
-  def initialize
-    @fix_list = []
-  end
+attr_accessor :bikes
 
   def fix
-    @fix_list.each do |x|
+    bikes.each do |x|
       x.broken = false
     end
   end
