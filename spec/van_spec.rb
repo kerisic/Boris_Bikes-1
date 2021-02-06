@@ -39,4 +39,16 @@ describe Van do
     subject.collect(garage)
     expect(subject.fixed_bikes[0]).not_to be_broken
   end
+
+  it "distributes working bikes to docking stations" do
+    docking_station.dock(bike1)
+    docking_station.dock(bike2)
+    subject.take(docking_station)
+    garage = Garage.new
+    subject.deliver(garage)
+    garage.fix
+    subject.collect(garage)
+    subject.distribute(docking_station)
+    expect(docking_station.bike_list[0]).not_to be_broken
+  end
 end

@@ -31,6 +31,9 @@ class Van
   end
 
   def distribute(station)
-
+    @fixed_bikes.each do |x|
+      station.bike_list << x
+    end
+    @fixed_bikes = []
   end
 end
