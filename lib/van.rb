@@ -2,10 +2,11 @@ require_relative 'Docking_station'
 require_relative 'garage'
 
 class Van
-  attr_accessor :broken_bikes
+  attr_accessor :broken_bikes, :fixed_bikes
 
   def initialize
     @broken_bikes = []
+    @fixed_bikes = []
   end
 
   def take(station)
@@ -20,5 +21,16 @@ class Van
       garage.fix_list << x
     end
     @broken_bikes = []
+  end
+
+  def collect(garage)
+    garage.fix_list.each do |x|
+      @fixed_bikes << x
+    end
+    garage.fix_list = []
+  end
+
+  def distribute(station)
+
   end
 end

@@ -28,4 +28,15 @@ describe Van do
     subject.deliver(garage)
     expect(garage.fix_list.size).to eq(2)
   end
+
+  it 'collects working bikes from garages' do
+    docking_station.dock(bike1)
+    docking_station.dock(bike2)
+    subject.take(docking_station)
+    garage = Garage.new
+    subject.deliver(garage)
+    garage.fix
+    subject.collect(garage)
+    expect(subject.fixed_bikes[0]).not_to be_broken
+  end
 end
